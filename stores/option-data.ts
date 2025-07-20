@@ -83,7 +83,7 @@ export const useOptionDataStore = defineStore("optionData", () => {
 
     const getOption = async (id: string) => {
         try {
-            option.value = await $fetch("/api/option/one", {
+            option.value = await $fetch<OptionDtoWithValues>("/api/option/one", {
                 method: "GET",
                 query: {
                     id,

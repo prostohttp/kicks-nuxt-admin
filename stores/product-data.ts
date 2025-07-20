@@ -29,7 +29,7 @@ export const useProductDataStore = defineStore("productData", () => {
     // handlers
     const getProductById = async (id: string) => {
         try {
-            const rawProduct: ProductDto = await $fetch("/api/product/one", {
+            const rawProduct = await $fetch<ProductDto>("/api/product/one", {
                 method: "GET",
                 query: {
                     id,

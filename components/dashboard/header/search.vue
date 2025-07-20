@@ -78,9 +78,9 @@ const searchHandlerWithShortcut = (event: KeyboardEvent) => {
         metaPressed.value = true;
     }
     if (metaPressed.value && event.code === "Enter" && query.value) {
-        navigateTo(`/dashboard/search?searchPhrase=${query.value}`);
-        metaPressed.value = false;
         hideSearchInputHandler();
+        metaPressed.value = false;
+        return navigateTo(`/dashboard/search?searchPhrase=${query.value}`);
     }
 };
 // hooks
@@ -95,11 +95,11 @@ watch(query, (oldValue, newValue) => {
 </script>
 
 <template>
-    <div class="flex gap-[10px] items-center">
-        <div class="flex items-center w-[40px] h-[40px] justify-center">
+    <div class="flex items-center gap-[10px]">
+        <div class="flex justify-center items-center w-[40px] h-[40px]">
             <UIcon
                 v-if="!isActive"
-                class="bg-dark-gray w-[24px] h-[24px] dark:bg-fa-white cursor-pointer hover:bg-blue dark:hover:bg-yellow"
+                class="bg-dark-gray hover:bg-blue dark:bg-fa-white dark:hover:bg-yellow w-[24px] h-[24px] cursor-pointer"
                 name="i-heroicons-magnifying-glass-20-solid"
                 @click="showSearchInputHandler"
             />
@@ -125,9 +125,9 @@ watch(query, (oldValue, newValue) => {
             <Transition>
                 <div
                     v-if="isOpen"
-                    class="md:absolute fixed top-[90px] md:right-0 right-[10px] rounded-[8px] bg-white p-[20px] md:min-w-[250px] md:w-auto w-[calc(100%-30px)] text-dark-gray dark:text-fa-white dark:bg-dark-bg flex flex-col gap-[16px] z-[101]"
+                    class="top-[90px] right-[10px] md:right-0 z-[101] fixed md:absolute flex flex-col gap-[16px] bg-white dark:bg-dark-bg p-[20px] rounded-[8px] w-[calc(100%-30px)] md:w-auto md:min-w-[250px] text-dark-gray dark:text-fa-white"
                 >
-                    <h3 class="font-[Rubik] text-[20px] font-[600]">
+                    <h3 class="font-[600] font-[Rubik] text-[20px]">
                         {{ locale[settingsDataStore.locale].searchResult }}
                     </h3>
                     <DashboardHeaderSearchList
@@ -137,7 +137,7 @@ watch(query, (oldValue, newValue) => {
                     <NuxtLink
                         v-if="founded && founded.length"
                         :to="`/dashboard/search?searchPhrase=${query}`"
-                        class="text-[16px] font-[600] text-blue dark:text-yellow hover:text-dark-gray dark:hover:text-fa-white"
+                        class="font-[600] text-[16px] text-blue hover:text-dark-gray dark:hover:text-fa-white dark:text-yellow"
                         @click="hideSearchInputHandler"
                     >
                         {{ locale[settingsDataStore.locale].seeAll }}
@@ -147,7 +147,7 @@ watch(query, (oldValue, newValue) => {
             <template #leading>
                 <UButton
                     :padded="true"
-                    class="text-dark-gray hover:text-blue dark:text-fa-white fixed sm:static left-[25px] top-[37px] z-[101]"
+                    class="top-[37px] left-[25px] z-[101] sm:static fixed text-dark-gray hover:text-blue dark:text-fa-white"
                     icon="i-heroicons-magnifying-glass-20-solid"
                     variant="link"
                 />
@@ -155,7 +155,7 @@ watch(query, (oldValue, newValue) => {
             <template #trailing>
                 <UButton
                     :padded="true"
-                    class="text-dark-gray hover:text-blue dark:text-fa-white fixed sm:static right-[20px] top-[37px] z-[101]"
+                    class="top-[37px] right-[20px] z-[101] sm:static fixed text-dark-gray hover:text-blue dark:text-fa-white"
                     icon="i-heroicons-x-mark-20-solid"
                     variant="link"
                     @click="hideSearchInputHandler"

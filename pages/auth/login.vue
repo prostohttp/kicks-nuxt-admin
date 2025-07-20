@@ -35,7 +35,7 @@ const login = async (data: LoginFormDto) => {
         redirect: false,
     });
     if (!isError.value.error) {
-        navigateTo("/dashboard");
+        return navigateTo("/dashboard");
     } else {
         toast.add({ title: locale[settingsDataStore.locale].error.wrongData });
     }
@@ -44,18 +44,18 @@ const loginHandler = useThrottleFn(login, 1000);
 </script>
 
 <template>
-    <div class="lg:grid flex flex-col lg:grid-cols-2 h-dvh dark:text-white">
+    <div class="flex flex-col lg:grid lg:grid-cols-2 h-dvh dark:text-white">
         <AuthSidebar />
         <div
-            class="flex lg:pt-[40px] pb-[40px] pt-[40px] lg:px-0 px-[30px] justify-center items-center"
+            class="flex justify-center items-center px-[30px] lg:px-0 pt-[40px] lg:pt-[40px] pb-[40px]"
         >
-            <div class="max-w-[480px] flex flex-col w-full gap-[24px]">
+            <div class="flex flex-col gap-[24px] w-full max-w-[480px]">
                 <div>
-                    <h1 class="font-[Rubik] font-[600] text-[36px] mb-[8px]">
+                    <h1 class="mb-[8px] font-[600] font-[Rubik] text-[36px]">
                         {{ locale[settingsDataStore.locale].login }}
                     </h1>
                     <ULink
-                        class="open-sans text-[16px] font-[600] underline decoration-gray-main"
+                        class="font-[600] text-[16px] decoration-gray-main underline open-sans"
                         to="/auth/forgot"
                     >
                         {{ locale[settingsDataStore.locale].forgotPassword }}
@@ -64,7 +64,7 @@ const loginHandler = useThrottleFn(login, 1000);
                 <AuthLoginForm @submit="loginHandler" />
                 <AuthSocialButtons />
                 <span
-                    class="open-sans text-[16px] font-[600] underline decoration-gray-main hover: cursor-pointer"
+                    class="font-[600] text-[16px] decoration-gray-main underline cursor-pointer open-sans hover:"
                     @click.prevent="isOpen = true"
                 >
                     {{ locale[settingsDataStore.locale].terms }}

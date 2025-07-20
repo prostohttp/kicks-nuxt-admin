@@ -93,7 +93,7 @@ const deleteBannerHandler = () => {
         toast.add({
             title: locale[settingsDataStore.locale].successDeleteMessage,
         });
-        navigateTo("/dashboard/banners?page=1");
+        return navigateTo("/dashboard/banners?page=1");
     } catch (error: any) {
         throw createError({ statusMessage: error.message });
     }
@@ -107,7 +107,7 @@ const deleteBannerHandler = () => {
     <div v-else class="space-y-4 w-full">
         <div
             v-if="!isValidForm"
-            class="bg-dark-gray dark:bg-yellow text-fa-white dark:text-dark-gray w-full text-center py-[5px] rounded-[8px]"
+            class="bg-dark-gray dark:bg-yellow py-[5px] rounded-[8px] w-full text-fa-white dark:text-dark-gray text-center"
         >
             {{ locale[settingsDataStore.locale].error.checkRequiredFields }}
         </div>
@@ -134,11 +134,11 @@ const deleteBannerHandler = () => {
                 />
             </UFormGroup>
             <div
-                class="flex flex-col lg:flex-row gap-[40px] py-[20px] justify-between"
+                class="flex lg:flex-row flex-col justify-between gap-[40px] py-[20px]"
             >
-                <div class="flex flex-col gap-[10px] lg:w-[30%] w-full">
+                <div class="flex flex-col gap-[10px] w-full lg:w-[30%]">
                     <UButton
-                        class="icon-button float-right mr-[15px] mb-[10px]"
+                        class="float-right mr-[15px] mb-[10px] icon-button"
                         icon="i-heroicons-plus-circle-16-solid"
                         type="button"
                         @click="addNewBanner"
@@ -149,7 +149,7 @@ const deleteBannerHandler = () => {
                         v-for="(tab, index) in bannerTabs"
                         :key="tab.id"
                         :class="{ 'active-tab': activeTab === index }"
-                        class="cursor-pointer py-[10px] pl-[20px] pr-[10px] rounded-[8px] flex justify-between items-center"
+                        class="flex justify-between items-center py-[10px] pr-[10px] pl-[20px] rounded-[8px] cursor-pointer"
                         @click="activeTab = index"
                     >
                         <span>
@@ -165,7 +165,7 @@ const deleteBannerHandler = () => {
                         />
                     </div>
                 </div>
-                <div class="lg:w-[70%] w-full">
+                <div class="w-full lg:w-[70%]">
                     <Transition>
                         <UFormGroup name="banners">
                             <DashboardBannerEditFormItem
@@ -181,10 +181,10 @@ const deleteBannerHandler = () => {
             </div>
             <div
                 v-if="isAdmin"
-                class="flex items-center gap-[20px] justify-end"
+                class="flex justify-end items-center gap-[20px]"
             >
                 <UButton
-                    class="bg-danger dark:bg-danger text-fa-white hover:bg-danger hover:dark:bg-danger big-button"
+                    class="bg-danger hover:bg-danger hover:dark:bg-danger dark:bg-danger text-fa-white big-button"
                     type="button"
                     @click="deleteBannerHandler"
                 >
@@ -200,7 +200,7 @@ const deleteBannerHandler = () => {
 
 <style scoped>
 .active-tab {
-    @apply bg-dark-gray text-fa-white dark:bg-dark-bg dark:text-fa-white;
+    @apply bg-dark-gray dark:bg-dark-bg text-fa-white dark:text-fa-white;
 }
 
 .active-tab .icon-button {

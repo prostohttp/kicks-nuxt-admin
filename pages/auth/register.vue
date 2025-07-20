@@ -63,7 +63,7 @@ const register = async (data: RegisterFormDto) => {
             toast.add({
                 title: "You are have been registered and now you can login",
                 callback: () => {
-                    navigateTo("/login");
+                    return navigateTo("/login");
                 },
             });
         } else {
@@ -80,20 +80,20 @@ const registerHandler = useThrottleFn(register, 1000);
 </script>
 
 <template>
-    <div class="lg:grid flex flex-col lg:grid-cols-2 h-dvh dark:text-white">
+    <div class="flex flex-col lg:grid lg:grid-cols-2 h-dvh dark:text-white">
         <AuthSidebar />
         <div
-            class="flex py-[10px] lg:px-0 px-[30px] justify-center items-center"
+            class="flex justify-center items-center px-[30px] lg:px-0 py-[10px]"
         >
-            <div class="max-w-[480px] flex flex-col w-full gap-[24px]">
+            <div class="flex flex-col gap-[24px] w-full max-w-[480px]">
                 <div>
-                    <h1 class="font-[Rubik] font-[600] text-[36px]">
+                    <h1 class="font-[600] font-[Rubik] text-[36px]">
                         {{ locale[settingsDataStore.locale].signUp }}
                     </h1>
-                    <h2 class="open-sans text-[20px] font-[600]"></h2>
+                    <h2 class="font-[600] text-[20px] open-sans"></h2>
                 </div>
                 <AuthSocialButtons />
-                <h2 class="font-[Rubik] font-[600] text-[36px]">
+                <h2 class="font-[600] font-[Rubik] text-[36px]">
                     {{ locale[settingsDataStore.locale].register }}
                 </h2>
                 <AuthRegisterForm @submit="registerHandler" />

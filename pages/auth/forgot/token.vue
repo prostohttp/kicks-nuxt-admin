@@ -49,7 +49,7 @@ const resetPassword = async (data: ResetPasswordDto) => {
         toast.add({
             title: locale[settingsDataStore.locale].passwordChanged,
             click: () => {
-                navigateTo("/login");
+                return navigateTo("/login");
             },
         });
     } catch (error) {}
@@ -76,15 +76,15 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:grid flex flex-col lg:grid-cols-2 h-dvh dark:text-white">
+    <div class="flex flex-col lg:grid lg:grid-cols-2 h-dvh dark:text-white">
         <AuthSidebar />
         <div
-            class="flex lg:pt-[40px] pb-[40px] pt-[40px] lg:px-0 px-[30px] justify-center items-center"
+            class="flex justify-center items-center px-[30px] lg:px-0 pt-[40px] lg:pt-[40px] pb-[40px]"
         >
             <LazyUiSpinner v-if="isLoading" />
-            <div v-else class="max-w-[480px] flex flex-col w-full gap-[24px]">
+            <div v-else class="flex flex-col gap-[24px] w-full max-w-[480px]">
                 <div>
-                    <h1 class="font-[Rubik] font-[600] text-[36px] mb-[8px]">
+                    <h1 class="mb-[8px] font-[600] font-[Rubik] text-[36px]">
                         {{ locale[settingsDataStore.locale].resetPassword }}
                     </h1>
                 </div>
@@ -109,7 +109,7 @@ onMounted(async () => {
                         {{ locale[settingsDataStore.locale].contactUsForHelp }}
                     </p>
                     <UButton
-                        class="bg-dark-gray h-[48px] px-[16px] flex w-full uppercase justify-center font-[Rubik] font-[500] hover:bg-yellow"
+                        class="flex justify-center bg-dark-gray hover:bg-yellow px-[16px] w-full h-[48px] font-[500] font-[Rubik] uppercase"
                         to="/forgot"
                     >
                         {{ locale[settingsDataStore.locale].tryAgain }}
